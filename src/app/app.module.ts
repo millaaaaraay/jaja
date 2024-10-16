@@ -4,8 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';  // Importamos BrowserAnimationsModule
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -21,10 +20,10 @@ import { IonicStorageModule } from '@ionic/storage-angular';
     HttpClientModule,
     // Agregamos IonicStorageModule aquí
     IonicStorageModule.forRoot(),
+    BrowserAnimationsModule,  // Agregamos el módulo de animaciones aquí
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    provideAnimationsAsync(),
   ],
   bootstrap: [AppComponent],
 })

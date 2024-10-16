@@ -1,17 +1,23 @@
 import { TestBed } from '@angular/core/testing';
-import { CanActivateFn } from '@angular/router';
+import { Router } from '@angular/router';
 
-import { authGuardGuard } from './auth-guard.guard';
+import { AuthGuard } from './auth-guard.guard';  // Cambia a AuthGuard
 
-describe('authGuardGuard', () => {
-  const executeGuard: CanActivateFn = (...guardParameters) => 
-      TestBed.runInInjectionContext(() => authGuardGuard(...guardParameters));
+describe('AuthGuard', () => {  // Cambia el nombre del describe
+  let guard: AuthGuard;
+  let routerSpy = { navigate: jasmine.createSpy('navigate') };
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [
+        AuthGuard,
+        { provide: Router, useValue: routerSpy },
+      ]
+    });
+    guard = TestBed.inject(AuthGuard);  // Inyecta el guard como clase
   });
 
   it('should be created', () => {
-    expect(executeGuard).toBeTruthy();
+    expect(guard).toBeTruthy();  // Verifica si el guard fue creado correctamente
   });
 });

@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { Storage } from '@ionic/storage-angular';  // Importamos Storage
-import { Observable } from 'rxjs';
+import { AuthService } from '../services/auth.service';  // Ruta corregida a 'auth.service.ts'
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private router: Router, private storage: Storage) { }  // Inyectamos Storage
+  constructor(private authService: AuthService, private router: Router) {}
 
   async canActivate(): Promise<boolean> {
-    const isAuthenticated = await this.storage.get('isAuthenticated');  // Verificamos si existe un token o flag de autenticación
+    const isAuthenticated = await this.authService.isAuthenticated();  // Verificamos si está autenticado
     if (isAuthenticated) {
       return true;  // Si está autenticado, permite el acceso
     } else {
